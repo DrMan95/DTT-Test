@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <Menu />
-    <HomePage />
+    <Menu id="menu" />
+    <router-view id="main"></router-view>
+    <Footer id="footer" />
   </div>
 </template>
 
 <script>
 import Menu from "./components/Menu";
-import HomePage from "./components/HomePage";
-
+import Footer from "./components/Footer";
 export default {
   name: "App",
   components: {
+    Footer,
     Menu,
-    HomePage,
   },
 };
 </script>
@@ -25,6 +25,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: blanchedalmond;
-  margin-top: 20px;
+}
+#menu {
+  position: fixed;
+  background-color: rgb(255, 223, 175);
+  width: 100%;
+}
+#main {
+  padding-top: 5%;
+  overflow: hidden;
+}
+#footer {
+  background-color: darkgoldenrod;
+  color: white;
 }
 </style>

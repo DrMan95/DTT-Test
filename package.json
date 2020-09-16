@@ -9,9 +9,13 @@
   },
   "dependencies": {
     "@bit/joshk.vue-spinners-css.hourglass-loader": "^1.1.4",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.17.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-loading-spinner": "^1.0.11"
+    "material-design-icons": "^3.0.1",
+    "vue": "^2.6.12",
+    "vue-loading-spinner": "^1.0.11",
+    "vue-router": "^3.4.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

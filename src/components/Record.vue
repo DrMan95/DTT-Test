@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button name="button" @click="$emit('click')">{{record.entries[0].API}}</button>
+    <button name="button" @click="$emit('click')">{{ record.name }}</button>
   </div>
 </template>
 
@@ -10,13 +10,21 @@ export default {
   props: {
     record: Object,
   },
+  data() {
+    return {
+      hover: false,
+    };
+  },
 };
 </script>
 
 <style scoped>
 button {
   width: 64%;
-  height: 25px;
+  height: 30px;
   background-color: coral;
+}
+button:hover {
+  background-color: chocolate;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <div id="menu-div">
+  <div>
     <nav>
-      <button>Home</button>
+      <button @click="goToHome">Home</button>
       <button>Categories</button>
-      <button>Random</button>
+      <button @click="goToRandom">Random</button>
     </nav>
   </div>
 </template>
@@ -11,6 +11,15 @@
 <script>
 export default {
   name: "Menu",
+  methods: {
+    goToRandom() {
+      this.$router.push("/pages/RandomPage");
+      // this.$router.go(2);
+    },
+    goToHome() {
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
@@ -18,14 +27,10 @@ export default {
 <style scoped>
 button {
   width: 20%;
-  height: 30px;
+  height: 45px;
   color: aliceblue;
   font-weight: bold;
   background-color: rgb(255, 0, 0);
   margin: 0 1%;
-}
-#menu-div {
-  background: inherit;
-  width: 100%;
 }
 </style>
