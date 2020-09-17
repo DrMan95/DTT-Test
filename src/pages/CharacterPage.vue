@@ -96,7 +96,7 @@ export default {
       var tmp;
       for (var i = 0; i < this.character.episode.length; i++) {
         tmp = this.character.episode[i].split("/");
-        this.episodes.push(this.allData.episodes[tmp[tmp.length - 1]]);
+        this.episodes.push(this.allData.episodes[tmp[tmp.length - 1] - 1]);
       }
     },
   },

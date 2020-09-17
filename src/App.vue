@@ -2,7 +2,7 @@
   <div id="app">
     <Menu id="menu" />
     <router-view v-if="responseAvailable" id="main" :allData="allDataComputed"></router-view>
-    <Footer id="footer" />
+    <Footer id="footer" :allData="allDataComputed" />
   </div>
 </template>
 
@@ -88,7 +88,7 @@ export default {
   overflow: hidden;
 }
 #footer {
-  background-color: darkgoldenrod;
+  background-color: black;
   color: white;
 }
 </style>

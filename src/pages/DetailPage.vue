@@ -1,23 +1,23 @@
 <template>
   <div>
     <h3>Episode details</h3>
-    <div v-if="selectedChar">
+    <div v-if="selectedEpisode">
       <b-list-group>
         <b-list-group-item>
           <b>ID</b>
-          : {{ selectedChar.id }}
+          : {{ selectedEpisode.id }}
         </b-list-group-item>
         <b-list-group-item>
           <b>Name</b>
-          : {{ selectedChar.name }}
+          : {{ selectedEpisode.name }}
         </b-list-group-item>
         <b-list-group-item>
           <b>Air Date</b>
-          : {{ selectedChar.air_date }}
+          : {{ selectedEpisode.air_date }}
         </b-list-group-item>
         <b-list-group-item>
           <b>Episode</b>
-          : {{ selectedChar.episode }}
+          : {{ selectedEpisode.episode }}
         </b-list-group-item>
         <b-list-group-item>
           <b>Characters</b>
@@ -55,6 +55,7 @@ export default {
     return {
       characters: [],
       responseAvailable: false,
+      // selectedEpisode: undefined,
       selectedChar: undefined,
     };
   },
@@ -72,8 +73,8 @@ export default {
     async getCharacters() {
       this.responseAvailable = false;
       var url = "";
-      for (var i = 0; i < this.$route.params.data.characters.length; i++) {
-        url = this.$route.params.data.characters[i];
+      for (var i = 0; i < this.selectedEpisode.characters.length; i++) {
+        url = this.selectedEpisode.characters[i];
         await fetch(url, {
           method: "GET",
         })
@@ -100,10 +101,13 @@ export default {
     },
   },
   mounted() {
-    this.selectedChar = this.$route.params.data;
+    // this.selectedEpisode = this.$route.params.data;
     this.getCharacters();
   },
   computed: {
+    selectedEpisode() {
+      return this.$route.params.data;
+    },
     charactersComputed() {
       if (this.characters.length > 0) {
         return this.characters;
