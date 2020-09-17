@@ -7,8 +7,7 @@
         episodes
       </h3>
       <br />
-      <HourglassLoader v-if="!responseAvailable" :color="'coral'" />
-      <div v-if="responseAvailable">
+      <div>
         <div id="sortContainer">
           <b-button
             pill
@@ -16,24 +15,20 @@
             :pressed.sync="IDToggle"
             id="sortID"
             @click="SortByID"
-          >
-            Sort by episode
-          </b-button>
+          >Sort by episode</b-button>
           <b-button
             pill
             variant="outline-secondary"
             :pressed.sync="NameToggle"
             id="sortName"
             @click="SortByName"
-          >
-            Sort by name
-          </b-button>
+          >Sort by name</b-button>
         </div>
         <div v-for="(record, index) in sortedRecords" :key="record.name">
           <Record @click="() => Show(index)" :record="record" />
         </div>
-        <b-link v-if="records.length == 10" @click="ShowAll">Show All</b-link>
-        <b-link v-else @click="ShowLess">Show Less</b-link>
+        <b-link v-if="records.length == 10" @click="ShowAll = true">Show All</b-link>
+        <b-link v-else @click="ShowAll = false">Show Less</b-link>
       </div>
     </div>
   </div>
@@ -41,34 +36,26 @@
 
 <script>
 import Record from "../components/Record";
-import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
 
 export default {
   name: "HomePage",
   components: {
     Record,
-    HourglassLoader,
   },
   data() {
     return {
-      responseAvailable: false,
-      records: [],
-      episodes: [],
       selectedRecord: undefined,
       IDToggle: true,
       NameToggle: false,
+      ShowAll: false,
     };
   },
+  props: {
+    allData: undefined,
+  },
   methods: {
-    ShowAll() {
-      this.records = this.episodes;
-    },
-    ShowLess() {
-      this.records = this.episodes.filter((elem, index) => index < 10);
-    },
     Show(index) {
       this.selectedRecord = this.sortedRecords[index];
-      console.log(this.selectedRecord);
       this.$router.push({
         name: "DetailPage",
         params: { data: this.selectedRecord },
@@ -82,44 +69,18 @@ export default {
       this.IDToggle = false;
       this.NameToggle = true;
     },
-    async getEpisodes() {
-      this.responseAvailable = false;
-      var url = "https://rickandmortyapi.com/api/episode";
-      do {
-        var hasNextPage = false;
-        await fetch(url, {
-          method: "GET",
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              alert(
-                "Server returned " +
-                  response.status +
-                  " : " +
-                  response.statusText
-              );
-            }
-          })
-          .then((response) => {
-            response.results.forEach((element) => {
-              this.episodes.push(element);
-            });
-            hasNextPage = response.info.next != null;
-            if (hasNextPage) {
-              url = response.info.next;
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } while (hasNextPage);
-      this.records = this.episodes.filter((elem, index) => index < 10);
-      this.responseAvailable = true;
-    },
   },
   computed: {
+    episodes() {
+      return this.allData.episodes;
+    },
+    records() {
+      if (this.ShowAll) {
+        return this.allData.episodes;
+      } else {
+        return this.episodes.filter((elem, index) => index < 10);
+      }
+    },
     sortedRecords() {
       var array = [...this.records];
 
@@ -137,9 +98,6 @@ export default {
         });
       }
     },
-  },
-  mounted: function() {
-    this.getEpisodes();
   },
 };
 </script>

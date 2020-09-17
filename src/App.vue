@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Menu id="menu" />
-    <router-view id="main"></router-view>
+    <router-view v-if="responseAvailable" id="main" :allData="allDataComputed"></router-view>
     <Footer id="footer" />
   </div>
 </template>
@@ -14,6 +14,58 @@ export default {
   components: {
     Footer,
     Menu,
+  },
+  data() {
+    return {
+      episodes: [],
+      responseAvailable: false,
+    };
+  },
+  methods: {
+    async getEpisodes() {
+      var url = "https://rickandmortyapi.com/api/episode";
+      do {
+        var hasNextPage = false;
+        await fetch(url, {
+          method: "GET",
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              alert(
+                "Server returned " +
+                  response.status +
+                  " : " +
+                  response.statusText
+              );
+            }
+          })
+          .then((response) => {
+            response.results.forEach((element) => {
+              this.episodes.push(element);
+            });
+            hasNextPage = response.info.next != null;
+            if (hasNextPage) {
+              url = response.info.next;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } while (hasNextPage);
+    },
+  },
+  computed: {
+    allDataComputed() {
+      return {
+        episodes: this.episodes,
+      };
+    },
+  },
+  mounted: function () {
+    this.getEpisodes();
+    this.responseAvailable = true;
   },
 };
 </script>

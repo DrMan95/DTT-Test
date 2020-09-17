@@ -1,41 +1,41 @@
 <template>
   <div>
-    <h3>Details</h3>
-    <div v-if="selectedRecord">
+    <h3>Episode details</h3>
+    <div v-if="selectedChar">
       <b-list-group>
         <b-list-group-item>
           <b>ID</b>
-          : {{ selectedRecord.id }}
+          : {{ selectedChar.id }}
         </b-list-group-item>
         <b-list-group-item>
           <b>Name</b>
-          : {{ selectedRecord.name }}
+          : {{ selectedChar.name }}
         </b-list-group-item>
         <b-list-group-item>
           <b>Air Date</b>
-          : {{ selectedRecord.air_date }}
+          : {{ selectedChar.air_date }}
         </b-list-group-item>
         <b-list-group-item>
           <b>Episode</b>
-          : {{ selectedRecord.episode }}
+          : {{ selectedChar.episode }}
         </b-list-group-item>
-        <b-list-group-item v-if="responseAvailable">
+        <b-list-group-item>
           <b>Characters</b>
-
-          <div v-for="record in charactersComputed" :key="record.name">
-            <Record :record="record" />
+          <div v-if="responseAvailable">
+            <div v-for="(record, index) in charactersComputed" :key="record.name">
+              <Record @click="() => Show(index)" :record="record" />
+            </div>
+          </div>
+          <div v-else>
+            <HourglassLoader v-if="!responseAvailable" :color="'coral'" />
           </div>
         </b-list-group-item>
       </b-list-group>
-      <button id="closeDetails" @click="goBack">
-        Back
-      </button>
+      <button id="goBack" @click="goBack">Back</button>
     </div>
     <div v-else>
       <b-list-group>
-        <b-list-group-item>
-          Data not found
-        </b-list-group-item>
+        <b-list-group-item>Data not found</b-list-group-item>
       </b-list-group>
     </div>
   </div>
@@ -43,30 +43,38 @@
 
 <script>
 import Record from "../components/Record";
+import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
 
 export default {
   name: "DetailPage",
   components: {
     Record,
+    HourglassLoader,
   },
   data() {
     return {
       characters: [],
       responseAvailable: false,
-      selectedRecord: undefined,
+      selectedChar: undefined,
     };
   },
   methods: {
     goBack() {
       this.$router.push("/");
     },
-    getCharacters() {
+    Show(index) {
+      this.selectedChar = this.characters[index];
+      this.$router.push({
+        name: "CharacterPage",
+        params: { data: this.selectedChar },
+      });
+    },
+    async getCharacters() {
       this.responseAvailable = false;
       var url = "";
-      console.log(this.$route.params.data);
       for (var i = 0; i < this.$route.params.data.characters.length; i++) {
         url = this.$route.params.data.characters[i];
-        fetch(url, {
+        await fetch(url, {
           method: "GET",
         })
           .then((response) => {
@@ -92,7 +100,7 @@ export default {
     },
   },
   mounted() {
-    this.selectedRecord = this.$route.params.data;
+    this.selectedChar = this.$route.params.data;
     this.getCharacters();
   },
   computed: {
@@ -108,7 +116,7 @@ export default {
 </script>
 
 <style scoped>
-#closeDetails {
+#goBack {
   background-color: black;
   color: white;
 }

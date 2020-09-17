@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h3>Random Location</h3>
+      <h3>Random Location Details</h3>
       <button @click="SelectRandomRecords">Next</button>
       <p v-if="responseAvailable">
         <b-list-group>
@@ -39,7 +39,6 @@ export default {
       selectedRecord: undefined,
     };
   },
-
   methods: {
     getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
@@ -87,7 +86,7 @@ export default {
       this.responseAvailable = true;
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.getRandomItems();
   },
 };
