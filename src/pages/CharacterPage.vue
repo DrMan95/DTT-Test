@@ -43,7 +43,7 @@
           </b-list-group-item>
           <b-list-group-item>
             <b>Episodes</b>
-            <div v-for="(record, index) in episodesComputed" :key="record">
+            <div v-for="(record, index) in episodesComputed" :key="record.id">
               <Record @click="() => Show(index)" :record="record" />
             </div>
           </b-list-group-item>
@@ -68,7 +68,6 @@ export default {
   data() {
     return {
       responseAvailable: false,
-      character: undefined,
       episodes: [],
       selectedRecord: undefined,
     };
@@ -77,7 +76,6 @@ export default {
     allData: undefined,
   },
   mounted() {
-    this.character = this.$route.params.data;
     this.getEpisodes();
     this.responseAvailable = true;
   },
@@ -101,6 +99,9 @@ export default {
     },
   },
   computed: {
+    character() {
+      return this.$route.params.data;
+    },
     episodesComputed() {
       if (this.episodes.length > 0) {
         return this.episodes;

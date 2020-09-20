@@ -1,29 +1,28 @@
 <template>
   <div>
-    <b-container class="bv-example-row">
-      <b-row>
-        <b-col>
-          <div v-for="(record, index) in s01" :key="record.name">
-            <b-link @click="() => Show(index)" :record="record">{{record.episode}}</b-link>
-          </div>
-        </b-col>
-        <b-col>
-          <div v-for="(record, index) in s02" :key="record.name">
-            <b-link @click="() => Show(index+11)" :record="record">{{record.episode}}</b-link>
-          </div>
-        </b-col>
-        <b-col>
-          <div v-for="(record, index) in s03" :key="record.name">
-            <b-link @click="() => Show(index+21)" :record="record">{{record.episode}}</b-link>
-          </div>
-        </b-col>
-        <b-col>
-          <div v-for="(record, index) in s04" :key="record.name">
-            <b-link @click="() => Show(index+31)" :record="record">{{record.episode}}</b-link>
-          </div>
-        </b-col>
-      </b-row>
-    </b-container>
+    <div id="container" class="bv-example-row">
+      <b-col id="sitemap">
+        <b-row>
+          <b-link @click="goToEpisodes">Episodes</b-link>
+        </b-row>
+        <b-row>
+          <b-link @click="goToCharaters">Characters</b-link>
+        </b-row>
+        <b-row>
+          <b-link @click="goToLocations">Location</b-link>
+        </b-row>
+      </b-col>
+      <b-col id="contact">
+        <b-row>
+          <b>Contact Me</b>
+        </b-row>
+        <b-row>Email</b-row>
+        <b-row>LinkedIn</b-row>
+        <b-row>Facebook</b-row>
+        <b-row>Instagram</b-row>
+      </b-col>
+    </div>
+    <p id="copyright">© Greece, 2020, Manthos Dretakis</p>
   </div>
 </template>
 
@@ -32,44 +31,31 @@ export default {
   name: "Footer",
   data() {
     return {
-      s01: [],
-      s02: [],
-      s03: [],
-      s04: [],
+      responseAvailable: false,
       selectedRecord: undefined,
     };
   },
-  props: {
-    allData: undefined,
-  },
-  components: {},
   methods: {
-    Show(index) {
-      this.selectedRecord = this.allData.episodes[index];
-      this.$router.push({
-        name: "DetailPage",
-        params: { data: this.selectedRecord },
-      });
+    goToEpisodes() {
+      this.$router.push("/");
     },
-    seperateSeasons() {
-      for (var i = 0; i < this.allData.episodes.length; i++) {
-        if (this.allData.episodes[i].episode[2] == "1") {
-          this.s01.push(this.allData.episodes[i]);
-        } else if (this.allData.episodes[i].episode[2] == "2") {
-          this.s02.push(this.allData.episodes[i]);
-        } else if (this.allData.episodes[i].episode[2] == "3") {
-          this.s03.push(this.allData.episodes[i]);
-        } else if (this.allData.episodes[i].episode[2] == "4") {
-          this.s04.push(this.allData.episodes[i]);
-        }
-      }
+    goToCharaters() {
+      this.$router.push("/pages/AllCharacters");
     },
-  },
-  created() {
-    this.seperateSeasons();
+    goToLocations() {
+      this.$router.push("/pages/AllLocations");
+    },
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+#container {
+  width: 100%;
+  padding-top: 2%;
+  display: grid;
+  grid-template-columns: 72% auto;
+}
+#sitemap {
+  margin-left: 25%;
+}
+</style>

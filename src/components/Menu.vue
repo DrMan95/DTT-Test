@@ -14,7 +14,6 @@ export default {
   methods: {
     goToRandom() {
       this.$router.push("/pages/RandomPage");
-      // this.$router.go(2);
     },
     goToHome() {
       this.$router.push("/");
@@ -23,7 +22,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 button {
   width: 20%;

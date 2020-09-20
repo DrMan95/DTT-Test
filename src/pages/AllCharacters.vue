@@ -1,13 +1,9 @@
 <template>
   <div>
-    <div id="homeComtainer">
-      <h1>Welcome to my Home page</h1>
-      <h3>
-        These are Rick & Morty
-        episodes
-      </h3>
+    <div>
+      <h1>All Characters</h1>
       <br />
-      <RecordHolder :recordsProp="episodes" />
+      <RecordHolder :recordsProp="characters" />
     </div>
   </div>
 </template>
@@ -16,7 +12,7 @@
 import RecordHolder from "../components/RecordHolder";
 
 export default {
-  name: "HomePage",
+  name: "AllCharacters",
   components: {
     RecordHolder,
   },
@@ -28,8 +24,8 @@ export default {
   },
   methods: {},
   computed: {
-    episodes() {
-      return this.allData.episodes;
+    characters() {
+      return this.allData.characters;
     },
   },
 };

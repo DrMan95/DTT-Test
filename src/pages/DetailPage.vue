@@ -22,7 +22,7 @@
         <b-list-group-item>
           <b>Characters</b>
           <div v-if="responseAvailable">
-            <div v-for="(record, index) in charactersComputed" :key="record.name">
+            <div v-for="(record, index) in charactersComputed" :key="record.id">
               <Record @click="() => Show(index)" :record="record" />
             </div>
           </div>

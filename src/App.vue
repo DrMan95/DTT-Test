@@ -18,6 +18,8 @@ export default {
   data() {
     return {
       episodes: [],
+      characters: [],
+      locations: [],
       responseAvailable: false,
     };
   },
@@ -55,16 +57,88 @@ export default {
           });
       } while (hasNextPage);
     },
+
+    async getCharacters() {
+      var url = "https://rickandmortyapi.com/api/character/";
+      do {
+        var hasNextPage = false;
+        await fetch(url, {
+          method: "GET",
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              alert(
+                "Server returned " +
+                  response.status +
+                  " : " +
+                  response.statusText
+              );
+            }
+          })
+          .then((response) => {
+            response.results.forEach((element) => {
+              this.characters.push(element);
+            });
+            hasNextPage = response.info.next != null;
+            if (hasNextPage) {
+              url = response.info.next;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } while (hasNextPage);
+    },
+
+    async getLocations() {
+      var url = "https://rickandmortyapi.com/api/location/";
+      do {
+        var hasNextPage = false;
+        await fetch(url, {
+          method: "GET",
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              alert(
+                "Server returned " +
+                  response.status +
+                  " : " +
+                  response.statusText
+              );
+            }
+          })
+          .then((response) => {
+            response.results.forEach((element) => {
+              this.locations.push(element);
+            });
+            hasNextPage = response.info.next != null;
+            if (hasNextPage) {
+              url = response.info.next;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } while (hasNextPage);
+    },
   },
   computed: {
     allDataComputed() {
       return {
         episodes: this.episodes,
+        characters: this.characters,
+        locations: this.locations,
       };
     },
   },
   mounted: function () {
     this.getEpisodes();
+    this.getCharacters();
+    this.getLocations();
     this.responseAvailable = true;
   },
 };

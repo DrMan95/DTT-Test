@@ -7,9 +7,12 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import App from "./App.vue";
 import HomePage from "./pages/HomePage";
+import AllCharacters from "./pages/AllCharacters";
+import AllLocations from "./pages/AllLocations";
 import DetailPage from "./pages/DetailPage";
-import RandomPage from "./pages/RandomPage";
 import CharacterPage from "./pages/CharacterPage";
+import LocationPage from "./pages/LocationPage";
+import RandomPage from "./pages/RandomPage";
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
@@ -24,6 +27,21 @@ const routes = [
     name: "CharacterPage",
     path: "/pages/CharacterPage",
     component: CharacterPage,
+  },
+  {
+    name: "AllCharacters",
+    path: "/pages/AllCharacters",
+    component: AllCharacters,
+  },
+  {
+    name: "LocationPage",
+    path: "/pages/LocationPage",
+    component: LocationPage,
+  },
+  {
+    name: "AllLocations",
+    path: "/pages/AllLocations",
+    component: AllLocations,
   },
 ];
 
