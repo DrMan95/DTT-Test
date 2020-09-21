@@ -1,93 +1,95 @@
 <template>
   <div>
     <div>
-      <h3>Random Location Details</h3>
-      <button @click="SelectRandomRecords">Next</button>
-      <p v-if="responseAvailable">
-        <b-list-group>
-          <b-list-group-item>
-            <b>ID</b>
-            : {{ selectedRecord.id }}
-          </b-list-group-item>
-          <b-list-group-item>
-            <b>Name</b>
-            : {{ selectedRecord.name }}
-          </b-list-group-item>
-          <b-list-group-item>
-            <b>Type</b>
-            : {{ selectedRecord.type }}
-          </b-list-group-item>
-          <b-list-group-item>
-            <b>Dimension</b>
-            : {{ selectedRecord.dimension }}
-          </b-list-group-item>
-        </b-list-group>
+      <h3 v-if="episodeItem">Random Episode Details</h3>
+      <h3 v-else-if="characterItem">Random Charecter Details</h3>
+      <h3 v-else-if="locationItem">Random Location Details</h3>
+
+      <button @click="SelectRandomItem">Next</button>
+      <p v-if="episodeItem">
+        <EpisodeDetails :episode="selectedRecord" :allData="allData" />
       </p>
+      <p v-else-if="characterItem">
+        <CharacterDetails :character="selectedRecord" :allData="allData" />
+      </p>
+      <p v-else-if="locationItem">
+        <LocationDetails :location="selectedRecord" :allData="allData" />
+      </p>
+      <p v-else>Something went wrong!</p>
     </div>
   </div>
 </template>
 
 <script>
+import EpisodeDetails from "../components/EpisodeDetails";
+import CharacterDetails from "../components/CharacterDetails";
+import LocationDetails from "../components/LocationDetails";
+
 export default {
   name: "RandomPage",
-  components: {},
+  components: {
+    EpisodeDetails,
+    CharacterDetails,
+    LocationDetails,
+  },
   data() {
     return {
-      responseAvailable: false,
-      result: [],
-      locations: [],
+      episodeItem: false,
+      characterItem: false,
+      locationItem: false,
       selectedRecord: undefined,
     };
+  },
+  props: {
+    allData: undefined,
   },
   methods: {
     getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
     },
-    SelectRandomRecords() {
-      this.selectedRecord = this.locations[
-        this.getRandomInt(this.locations.length)
-      ];
-    },
-    async getRandomItems() {
-      this.responseAvailable = false;
-      var url = "https://rickandmortyapi.com/api/location";
-      do {
-        var hasNextPage = false;
-        await fetch(url, {
-          method: "GET",
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              alert(
-                "Server returned " +
-                  response.status +
-                  " : " +
-                  response.statusText
-              );
-            }
-          })
-          .then((response) => {
-            this.result.push(response);
-            response.results.forEach((element) => {
-              this.locations.push(element);
-            });
-            hasNextPage = response.info.next != null;
-            if (hasNextPage) {
-              url = response.info.next;
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } while (hasNextPage);
-      this.SelectRandomRecords();
-      this.responseAvailable = true;
+    SelectRandomItem() {
+      var type = this.getRandomInt(3);
+      switch (type) {
+        case 0:
+          this.episodeItem = true;
+          this.characterItem = false;
+          this.locationItem = false;
+          this.selectedRecord = this.episodes[
+            this.getRandomInt(this.episodes.length)
+          ];
+          break;
+        case 1:
+          this.episodeItem = false;
+          this.characterItem = true;
+          this.locationItem = false;
+          this.selectedRecord = this.characters[
+            this.getRandomInt(this.characters.length)
+          ];
+          break;
+        case 2:
+          this.episodeItem = false;
+          this.characterItem = false;
+          this.locationItem = true;
+          this.selectedRecord = this.locations[
+            this.getRandomInt(this.locations.length)
+          ];
+          break;
+      }
     },
   },
-  mounted: function () {
-    this.getRandomItems();
+  computed: {
+    episodes() {
+      return this.allData.episodes;
+    },
+    characters() {
+      return this.allData.characters;
+    },
+    locations() {
+      return this.allData.locations;
+    },
+  },
+  mounted() {
+    this.SelectRandomItem();
   },
 };
 </script>

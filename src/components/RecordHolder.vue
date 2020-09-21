@@ -6,13 +6,13 @@
         variant="outline-secondary"
         :pressed.sync="IDToggle"
         @click="SortByID"
-      >Sort by episode</b-button>
+      >Sort by ID</b-button>
       <b-button
         pill
         variant="outline-secondary"
         :pressed.sync="NameToggle"
         @click="SortByName"
-      >Sort by name</b-button>
+      >Sort by Name</b-button>
     </div>
     <div v-for="(record, index) in sortedRecords" :key="record.id">
       <Record @click="() => Show(index)" :record="record" />

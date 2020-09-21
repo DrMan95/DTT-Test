@@ -16,13 +16,9 @@ export default {
   components: {
     RecordHolder,
   },
-  data() {
-    return {};
-  },
   props: {
     allData: undefined,
   },
-  methods: {},
   computed: {
     characters() {
       return this.allData.characters;

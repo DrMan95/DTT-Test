@@ -20,13 +20,9 @@ export default {
   components: {
     RecordHolder,
   },
-  data() {
-    return {};
-  },
   props: {
     allData: undefined,
   },
-  methods: {},
   computed: {
     episodes() {
       return this.allData.episodes;
