@@ -2,7 +2,7 @@
   <div>
     <nav>
       <button @click="goToHome">Home</button>
-      <button>Categories</button>
+      <button @click="goToCategories">Categories</button>
       <button @click="goToRandom">Random</button>
     </nav>
   </div>
@@ -12,11 +12,14 @@
 export default {
   name: "Menu",
   methods: {
-    goToRandom() {
-      this.$router.push("/pages/RandomPage");
-    },
     goToHome() {
       this.$router.push("/");
+    },
+    goToCategories() {
+      this.$router.push("/Categories");
+    },
+    goToRandom() {
+      this.$router.push("/RandomPage");
     },
   },
 };

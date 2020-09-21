@@ -40,10 +40,10 @@ export default {
       this.$router.push("/");
     },
     goToCharaters() {
-      this.$router.push("/pages/AllCharacters");
+      this.$router.push("/AllCharacters");
     },
     goToLocations() {
-      this.$router.push("/pages/AllLocations");
+      this.$router.push("/AllLocations");
     },
   },
 };

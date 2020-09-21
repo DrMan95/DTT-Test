@@ -5,7 +5,7 @@
       <h3 v-else-if="characterItem">Random Charecter Details</h3>
       <h3 v-else-if="locationItem">Random Location Details</h3>
 
-      <button @click="SelectRandomItem">Next</button>
+      <b-button @click="SelectRandomItem">Next Item</b-button>
       <p v-if="episodeItem">
         <EpisodeDetails :episode="selectedRecord" :allData="allData" />
       </p>

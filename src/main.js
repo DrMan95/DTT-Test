@@ -7,6 +7,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import App from "./App.vue";
 import HomePage from "./pages/HomePage";
+import Categories from "./pages/Categories";
 import AllCharacters from "./pages/AllCharacters";
 import AllLocations from "./pages/AllLocations";
 import DetailPage from "./pages/DetailPage";
@@ -21,26 +22,27 @@ Vue.config.productionTip = false;
 
 const routes = [
   { name: "HomePage", path: "/", component: HomePage },
-  { name: "DetailPage", path: "/pages/DetailPage", component: DetailPage },
-  { name: "RandomPage", path: "/pages/RandomPage", component: RandomPage },
+  { name: "Categories", path: "/Categories", component: Categories },
+  { name: "DetailPage", path: "/DetailPage", component: DetailPage },
+  { name: "RandomPage", path: "/RandomPage", component: RandomPage },
   {
     name: "CharacterPage",
-    path: "/pages/CharacterPage",
+    path: "/CharacterPage",
     component: CharacterPage,
   },
   {
     name: "AllCharacters",
-    path: "/pages/AllCharacters",
+    path: "/AllCharacters",
     component: AllCharacters,
   },
   {
     name: "LocationPage",
-    path: "/pages/LocationPage",
+    path: "/LocationPage",
     component: LocationPage,
   },
   {
     name: "AllLocations",
-    path: "/pages/AllLocations",
+    path: "/AllLocations",
     component: AllLocations,
   },
 ];

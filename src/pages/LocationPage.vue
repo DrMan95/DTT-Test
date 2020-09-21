@@ -25,8 +25,4 @@ export default {
 };
 </script>
 <style scoped>
-#goBack {
-  background-color: black;
-  color: white;
-}
 </style>

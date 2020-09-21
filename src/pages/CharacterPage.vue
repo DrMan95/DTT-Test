@@ -3,7 +3,6 @@
     <div>
       <h3>Character details</h3>
       <CharacterDetails :character="character" :allData="allData" />
-      <button id="goBack" @click="goBack">Back</button>
     </div>
   </div>
 </template>
@@ -23,11 +22,6 @@ export default {
   props: {
     allData: undefined,
   },
-  methods: {
-    goBack() {
-      this.$router.push("/");
-    },
-  },
   computed: {
     character() {
       return this.$route.params.data;
@@ -36,8 +30,4 @@ export default {
 };
 </script>
 <style scoped>
-#goBack {
-  background-color: black;
-  color: white;
-}
 </style>

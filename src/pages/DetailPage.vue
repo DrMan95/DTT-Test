@@ -1,15 +1,7 @@
 <template>
   <div>
     <h3>Episode details</h3>
-    <div v-if="selectedEpisode">
-      <EpisodeDetails :episode="selectedEpisode" :allData="allData" />
-      <button id="goBack" @click="goBack">Back</button>
-    </div>
-    <div v-else>
-      <b-list-group>
-        <b-list-group-item>Data not found</b-list-group-item>
-      </b-list-group>
-    </div>
+    <EpisodeDetails :episode="selectedEpisode" :allData="allData" />
   </div>
 </template>
 
@@ -29,11 +21,6 @@ export default {
   props: {
     allData: undefined,
   },
-  methods: {
-    goBack() {
-      this.$router.push("/");
-    },
-  },
   computed: {
     selectedEpisode() {
       return this.$route.params.data;
@@ -43,8 +30,4 @@ export default {
 </script>
 
 <style scoped>
-#goBack {
-  background-color: black;
-  color: white;
-}
 </style>

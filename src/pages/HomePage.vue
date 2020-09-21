@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div id="homeComtainer">
-      <h1>Welcome to my Home page</h1>
-      <h3>
+    <div>
+      <h2>
         These are Rick & Morty
         episodes
-      </h3>
+      </h2>
       <br />
       <RecordHolder :recordsProp="episodes" />
     </div>
