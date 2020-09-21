@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-if="responseAvailable">
+    <p>
       <b-list-group>
         <b-list-group-item>
           <b>ID</b>
@@ -16,12 +16,17 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Residents</b>
-          <div v-if="characters.length > 0">
-            <div v-for="(record, index) in CharactersComputed" :key="record.id">
-              <Record @click="() => Show(index)" :record="record" />
+          <div v-if="CharactersComputed.length">
+            <div v-if="characters.length > 0">
+              <div v-for="(record, index) in CharactersComputed" :key="record.id">
+                <Record @click="() => Show(index)" :record="record" />
+              </div>
             </div>
+            <div v-else>This planet has no residents.</div>
           </div>
-          <div v-else>This planet has no residents.</div>
+          <div v-else>
+            <HourglassLoader v-if="!responseAvailable" :color="'coral'" />
+          </div>
         </b-list-group-item>
         <b-list-group-item>
           <b>Created</b>
@@ -34,12 +39,12 @@
 
 <script>
 import Record from "../components/Record";
+import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
+
 export default {
   name: "LocationDetails",
   data() {
     return {
-      responseAvailable: false,
-      characters: [],
       selectedRecord: undefined,
     };
   },
@@ -48,6 +53,7 @@ export default {
     allData: undefined,
   },
   components: {
+    HourglassLoader,
     Record,
   },
   methods: {
@@ -58,19 +64,17 @@ export default {
         params: { data: this.selectedRecord },
       });
     },
-    getCharacters() {
-      var tmp;
-      for (var i = 0; i < this.location.residents.length; i++) {
-        tmp = this.location.residents[i].split("/");
-        this.characters.push(this.allData.characters[tmp[tmp.length - 1] - 1]);
-      }
-    },
-  },
-  mounted() {
-    this.getCharacters();
-    this.responseAvailable = true;
   },
   computed: {
+    characters() {
+      var tmp;
+      var characters = [];
+      for (var i = 0; i < this.location.residents.length; i++) {
+        tmp = this.location.residents[i].split("/");
+        characters.push(this.allData.characters[tmp[tmp.length - 1] - 1]);
+      }
+      return characters;
+    },
     CharactersComputed() {
       if (this.characters.length > 0) {
         return this.characters;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-if="responseAvailable">
+    <p>
       <b-list-group>
         <b-list-group-item>
           <b>ID</b>
@@ -41,8 +41,13 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Episodes</b>
-          <div v-for="(record, index) in EpisodesComputed" :key="record.id">
-            <Record @click="() => Show(index)" :record="record" />
+          <div v-if="EpisodesComputed.length">
+            <div v-for="(record, index) in EpisodesComputed" :key="record.id">
+              <Record @click="() => Show(index)" :record="record" />
+            </div>
+          </div>
+          <div v-else>
+            <HourglassLoader v-if="!responseAvailable" :color="'coral'" />
           </div>
         </b-list-group-item>
         <b-list-group-item>
@@ -56,13 +61,11 @@
 
 <script>
 import Record from "../components/Record";
-// import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
+import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
 export default {
   name: "CharacterDetails",
   data() {
     return {
-      responseAvailable: false,
-      episodes: [],
       selectedRecord: undefined,
     };
   },
@@ -72,7 +75,7 @@ export default {
   },
   components: {
     Record,
-    // HourglassLoader,
+    HourglassLoader,
   },
   methods: {
     Show(index) {
@@ -82,19 +85,17 @@ export default {
         params: { data: this.selectedRecord },
       });
     },
-    getEpisodes() {
-      var tmp;
-      for (var i = 0; i < this.character.episode.length; i++) {
-        tmp = this.character.episode[i].split("/");
-        this.episodes.push(this.allData.episodes[tmp[tmp.length - 1] - 1]);
-      }
-    },
-  },
-  mounted() {
-    this.getEpisodes();
-    this.responseAvailable = true;
   },
   computed: {
+    episodes() {
+      var tmp;
+      var episodes = [];
+      for (var i = 0; i < this.character.episode.length; i++) {
+        tmp = this.character.episode[i].split("/");
+        episodes.push(this.allData.episodes[tmp[tmp.length - 1] - 1]);
+      }
+      return episodes;
+    },
     EpisodesComputed() {
       if (this.episodes.length > 0) {
         return this.episodes;
