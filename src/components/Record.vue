@@ -21,8 +21,13 @@ export default {
 <style scoped>
 button {
   width: 64%;
-  height: 30px;
+  /* height: 30px; */
   background-color: coral;
+  padding: 5px;
+  border-radius: 16px;
+  margin: 3px;
+  font-weight: bold;
+  font-size: 18px;
 }
 button:hover {
   background-color: chocolate;

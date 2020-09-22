@@ -2,13 +2,13 @@
   <div>
     <h2>What would youlike to see?</h2>
     <br />
-    <b-button size="lg" variant="info" @click="goToEpisodes">Episodes</b-button>
+    <b-button size="lg" @click="goToEpisodes">Episodes</b-button>
     <br />
     <br />
-    <b-button size="lg" variant="info" @click="goToCharaters">Characters</b-button>
+    <b-button size="lg" @click="goToCharaters">Characters</b-button>
     <br />
     <br />
-    <b-button size="lg" variant="info" @click="goToLocations">Locations</b-button>
+    <b-button size="lg" @click="goToLocations">Locations</b-button>
     <br />
     <br />
   </div>
@@ -35,7 +35,9 @@ export default {
 </script>
 
 <style scoped>
-b-button {
+button {
   margin: 0 1%;
+  background-color: coral;
+  width: 20%;
 }
 </style>

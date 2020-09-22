@@ -20,14 +20,7 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Characters</b>
-          <div v-if="CharactersComputed.length">
-            <div v-for="(record, index) in CharactersComputed" :key="record.id">
-              <Record @click="() => Show(index)" :record="record" />
-            </div>
-          </div>
-          <div v-else>
-            <HourglassLoader v-if="!responseAvailable" :color="'coral'" />
-          </div>
+          <RecordHolder :recordsProp="CharactersComputed" />
         </b-list-group-item>
       </b-list-group>
     </p>
@@ -35,8 +28,7 @@
 </template>
 
 <script>
-import Record from "../components/Record";
-import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
+import RecordHolder from "../components/RecordHolder";
 export default {
   name: "EpisodeDetails",
   data() {
@@ -49,8 +41,7 @@ export default {
     allData: undefined,
   },
   components: {
-    Record,
-    HourglassLoader,
+    RecordHolder,
   },
   methods: {
     Show(index) {

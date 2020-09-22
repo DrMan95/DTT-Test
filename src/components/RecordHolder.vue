@@ -18,7 +18,7 @@
       <Record @click="() => Show(index)" :record="record" />
     </div>
     <b-link v-if="records.length == 10" @click="ShowAll = true">Show All</b-link>
-    <b-link v-else @click="ShowAll = false">Show Less</b-link>
+    <b-link v-else-if="records.length > 10" @click="ShowAll = false">Show Less</b-link>
   </div>
 </template>
 
@@ -97,3 +97,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+a {
+  color: black;
+}
+</style>

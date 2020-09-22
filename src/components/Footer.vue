@@ -58,4 +58,7 @@ export default {
 #sitemap {
   margin-left: 25%;
 }
+#container a {
+  color: white;
+}
 </style>

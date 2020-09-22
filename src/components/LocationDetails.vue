@@ -16,17 +16,8 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Residents</b>
-          <div v-if="CharactersComputed.length">
-            <div v-if="characters.length > 0">
-              <div v-for="(record, index) in CharactersComputed" :key="record.id">
-                <Record @click="() => Show(index)" :record="record" />
-              </div>
-            </div>
-            <div v-else>This planet has no residents.</div>
-          </div>
-          <div v-else>
-            <HourglassLoader v-if="!responseAvailable" :color="'coral'" />
-          </div>
+          <RecordHolder v-if="CharactersComputed.length > 0" :recordsProp="CharactersComputed" />
+          <p v-else>This Planet has no residents.</p>
         </b-list-group-item>
         <b-list-group-item>
           <b>Created</b>
@@ -38,8 +29,7 @@
 </template>
 
 <script>
-import Record from "../components/Record";
-import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
+import RecordHolder from "../components/RecordHolder";
 
 export default {
   name: "LocationDetails",
@@ -53,8 +43,7 @@ export default {
     allData: undefined,
   },
   components: {
-    HourglassLoader,
-    Record,
+    RecordHolder,
   },
   methods: {
     Show(index) {

@@ -32,7 +32,7 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Location</b>
-          : {{ character.location.name }}
+          <Record @click="() => ShowL()" :record="location" />
         </b-list-group-item>
         <b-list-group-item>
           <b>Image</b>
@@ -41,14 +41,7 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Episodes</b>
-          <div v-if="EpisodesComputed.length">
-            <div v-for="(record, index) in EpisodesComputed" :key="record.id">
-              <Record @click="() => Show(index)" :record="record" />
-            </div>
-          </div>
-          <div v-else>
-            <HourglassLoader v-if="!responseAvailable" :color="'coral'" />
-          </div>
+          <RecordHolder :recordsProp="EpisodesComputed" />
         </b-list-group-item>
         <b-list-group-item>
           <b>Created</b>
@@ -60,8 +53,8 @@
 </template>
 
 <script>
+import RecordHolder from "../components/RecordHolder";
 import Record from "../components/Record";
-import HourglassLoader from "@bit/joshk.vue-spinners-css.hourglass-loader";
 export default {
   name: "CharacterDetails",
   data() {
@@ -74,8 +67,8 @@ export default {
     allData: undefined,
   },
   components: {
+    RecordHolder,
     Record,
-    HourglassLoader,
   },
   methods: {
     Show(index) {
@@ -85,8 +78,19 @@ export default {
         params: { data: this.selectedRecord },
       });
     },
+    ShowL() {
+      this.selectedRecord = this.location;
+      this.$router.push({
+        name: "LocationPage",
+        params: { data: this.selectedRecord },
+      });
+    },
   },
   computed: {
+    location() {
+      var tmp = this.character.location.url.split("/");
+      return this.allData.locations[tmp[tmp.length - 1] - 1];
+    },
     episodes() {
       var tmp;
       var episodes = [];

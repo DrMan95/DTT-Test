@@ -149,21 +149,32 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  min-height: 100vh;
   text-align: center;
   align-items: center;
   background-color: blanchedalmond;
 }
 #menu {
   position: fixed;
+  z-index: 1;
   background-color: rgb(255, 223, 175);
   width: 100%;
 }
 #main {
-  padding-top: 5%;
+  padding-top: 75px;
   overflow: hidden;
+  padding-bottom: 200px;
 }
 #footer {
-  background-color: black;
+  background-color: gray;
   color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+}
+.list-group-item {
+  background-color: blanchedalmond !important;
 }
 </style>
