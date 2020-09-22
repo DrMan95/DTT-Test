@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>Location details</h3>
-      <LocationDetails :location="location" :allData="allData" />
+      <LocationDetails :location="$route.params.data" :allData="allData" />
     </div>
   </div>
 </template>
@@ -17,12 +17,7 @@ export default {
   props: {
     allData: undefined,
   },
-  computed: {
-    location() {
-      return this.$route.params.data;
-    },
-  },
 };
 </script>
-<style scoped>
-</style>
+
+<style scoped></style>

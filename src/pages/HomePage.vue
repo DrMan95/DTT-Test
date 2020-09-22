@@ -2,11 +2,10 @@
   <div>
     <div>
       <h2>
-        These are Rick & Morty
-        episodes
+        These are Rick & Morty episodes
       </h2>
       <br />
-      <RecordHolder :recordsProp="episodes" />
+      <RecordHolder :recordsProp="allData.episodes" />
     </div>
   </div>
 </template>
@@ -21,11 +20,6 @@ export default {
   },
   props: {
     allData: undefined,
-  },
-  computed: {
-    episodes() {
-      return this.allData.episodes;
-    },
   },
 };
 </script>

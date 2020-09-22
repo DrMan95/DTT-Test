@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>Character details</h3>
-      <CharacterDetails :character="character" :allData="allData" />
+      <CharacterDetails :character="$route.params.data" :allData="allData" />
     </div>
   </div>
 </template>
@@ -22,12 +22,7 @@ export default {
   props: {
     allData: undefined,
   },
-  computed: {
-    character() {
-      return this.$route.params.data;
-    },
-  },
 };
 </script>
-<style scoped>
-</style>
+
+<style scoped></style>

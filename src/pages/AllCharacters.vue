@@ -3,7 +3,7 @@
     <div>
       <h1>All Characters</h1>
       <br />
-      <RecordHolder :recordsProp="characters" />
+      <RecordHolder :recordsProp="allData.characters" />
     </div>
   </div>
 </template>
@@ -18,11 +18,6 @@ export default {
   },
   props: {
     allData: undefined,
-  },
-  computed: {
-    characters() {
-      return this.allData.characters;
-    },
   },
 };
 </script>

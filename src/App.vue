@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <Menu id="menu" />
-    <router-view v-if="responseAvailable" id="main" :allData="allDataComputed"></router-view>
+    <router-view
+      v-if="responseAvailable"
+      id="main"
+      :allData="allDataComputed"
+    ></router-view>
     <Footer id="footer" :allData="allDataComputed" />
   </div>
 </template>
@@ -132,10 +136,11 @@ export default {
         episodes: this.episodes,
         characters: this.characters,
         locations: this.locations,
+        video: this.videoEpisode,
       };
     },
   },
-  mounted: function () {
+  mounted: function() {
     this.getEpisodes();
     this.getCharacters();
     this.getLocations();

@@ -17,9 +17,6 @@
 <script>
 export default {
   name: "Categories",
-  data() {
-    return {};
-  },
   methods: {
     goToEpisodes() {
       this.$router.push("/");

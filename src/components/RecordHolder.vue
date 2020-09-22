@@ -1,18 +1,20 @@
 <template>
   <div>
     <div>
-      <b-button
-        pill
-        variant="outline-secondary"
-        :pressed.sync="IDToggle"
-        @click="SortByID"
-      >Sort by ID</b-button>
-      <b-button
-        pill
-        variant="outline-secondary"
-        :pressed.sync="NameToggle"
-        @click="SortByName"
-      >Sort by Name</b-button>
+      <div v-if="records.length > 1">
+        <b-button
+          pill
+          variant="outline-secondary"
+          :pressed.sync="IDToggle"
+          @click="SortByID"
+        >Sort by ID</b-button>
+        <b-button
+          pill
+          variant="outline-secondary"
+          :pressed.sync="NameToggle"
+          @click="SortByName"
+        >Sort by Name</b-button>
+      </div>
     </div>
     <div v-for="(record, index) in sortedRecords" :key="record.id">
       <Record @click="() => Show(index)" :record="record" />

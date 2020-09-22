@@ -3,7 +3,7 @@
     <div>
       <h1>All Locations</h1>
       <br />
-      <RecordHolder :recordsProp="locations" />
+      <RecordHolder :recordsProp="allData.locations" />
     </div>
   </div>
 </template>
@@ -18,11 +18,6 @@ export default {
   },
   props: {
     allData: undefined,
-  },
-  computed: {
-    locations() {
-      return this.allData.locations;
-    },
   },
 };
 </script>

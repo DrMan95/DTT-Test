@@ -54,38 +54,27 @@ export default {
           this.episodeItem = true;
           this.characterItem = false;
           this.locationItem = false;
-          this.selectedRecord = this.episodes[
-            this.getRandomInt(this.episodes.length)
+          this.selectedRecord = this.allData.episodes[
+            this.getRandomInt(this.allData.episodes.length)
           ];
           break;
         case 1:
           this.episodeItem = false;
           this.characterItem = true;
           this.locationItem = false;
-          this.selectedRecord = this.characters[
-            this.getRandomInt(this.characters.length)
+          this.selectedRecord = this.allData.characters[
+            this.getRandomInt(this.allData.characters.length)
           ];
           break;
         case 2:
           this.episodeItem = false;
           this.characterItem = false;
           this.locationItem = true;
-          this.selectedRecord = this.locations[
-            this.getRandomInt(this.locations.length)
+          this.selectedRecord = this.allData.locations[
+            this.getRandomInt(this.allData.locations.length)
           ];
           break;
       }
-    },
-  },
-  computed: {
-    episodes() {
-      return this.allData.episodes;
-    },
-    characters() {
-      return this.allData.characters;
-    },
-    locations() {
-      return this.allData.locations;
     },
   },
   mounted() {
@@ -94,5 +83,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

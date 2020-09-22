@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Episode details</h3>
-    <EpisodeDetails :episode="selectedEpisode" :allData="allData" />
+    <EpisodeDetails :episode="$route.params.data" :allData="allData" />
   </div>
 </template>
 
@@ -20,11 +20,6 @@ export default {
   },
   props: {
     allData: undefined,
-  },
-  computed: {
-    selectedEpisode() {
-      return this.$route.params.data;
-    },
   },
 };
 </script>

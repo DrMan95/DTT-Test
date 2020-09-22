@@ -16,10 +16,16 @@
         <b-row>
           <b>Contact Me</b>
         </b-row>
-        <b-row>Email</b-row>
-        <b-row>LinkedIn</b-row>
-        <b-row>Facebook</b-row>
-        <b-row>Instagram</b-row>
+        <b-row>dretakis.dre@gmail.com</b-row>
+        <b-row>
+          <a href="https://www.linkedin.com/in/manthos-dretakis-3133a5197/" target="_blank">LinkedIn</a>
+        </b-row>
+        <b-row>
+          <a href="https://www.facebook.com/manthos.dretakis" target="_blank">Facebook</a>
+        </b-row>
+        <b-row>
+          <a href="https://www.instagram.com/dr.man95/?hl=en" target="_blank">Instagram</a>
+        </b-row>
       </b-col>
     </div>
     <p id="copyright">© Greece, 2020, Manthos Dretakis</p>

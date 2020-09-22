@@ -73,4 +73,9 @@ export default {
 };
 </script>
 <style scoped>
+.vue-video-player {
+  margin-left: 30%;
+  width: 40%;
+  height: 400px;
+}
 </style>
