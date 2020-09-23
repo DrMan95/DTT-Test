@@ -32,7 +32,7 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Location</b>
-          <Record @click="() => ShowL()" :record="location" />
+          <Record @click="() => ShowLocationDetails()" :record="location" />
         </b-list-group-item>
         <b-list-group-item>
           <b>Image</b>
@@ -57,11 +57,6 @@ import RecordHolder from "../components/RecordHolder";
 import Record from "../components/Record";
 export default {
   name: "CharacterDetails",
-  data() {
-    return {
-      selectedRecord: undefined,
-    };
-  },
   props: {
     character: undefined,
     allData: undefined,
@@ -71,26 +66,22 @@ export default {
     Record,
   },
   methods: {
-    Show(index) {
-      this.selectedRecord = this.EpisodesComputed[index];
-      this.$router.push({
-        name: "DetailPage",
-        params: { data: this.selectedRecord },
-      });
-    },
-    ShowL() {
-      this.selectedRecord = this.location;
+    //rendering LocationPage at router-view tag in App.vue with a location as parameter.
+    ShowLocationDetails() {
+      var selected = this.location;
       this.$router.push({
         name: "LocationPage",
-        params: { data: this.selectedRecord },
+        params: { data: selected },
       });
     },
   },
   computed: {
+    //find the location the character is from, from the locations array
     location() {
       var tmp = this.character.location.url.split("/");
       return this.allData.locations[tmp[tmp.length - 1] - 1];
     },
+    //find the episodes the character has played in, from the episodes array
     episodes() {
       var tmp;
       var episodes = [];
@@ -101,14 +92,9 @@ export default {
       return episodes;
     },
     EpisodesComputed() {
-      if (this.episodes.length > 0) {
-        return this.episodes;
-      } else {
-        return [];
-      }
+      return this.episodes;
     },
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

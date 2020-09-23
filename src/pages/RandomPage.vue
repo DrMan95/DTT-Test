@@ -6,6 +6,7 @@
       <h3 v-else-if="locationItem">Random Location Details</h3>
 
       <b-button @click="SelectRandomItem">Next Item</b-button>
+      <!-- depending on the item that will be randomly selected it will render the corresponding component -->
       <p v-if="episodeItem">
         <EpisodeDetails :episode="selectedRecord" :allData="allData" />
       </p>
@@ -15,6 +16,7 @@
       <p v-else-if="locationItem">
         <LocationDetails :location="selectedRecord" :allData="allData" />
       </p>
+      <!-- this one will never render -->
       <p v-else>Something went wrong!</p>
     </div>
   </div>
@@ -44,9 +46,11 @@ export default {
     allData: undefined,
   },
   methods: {
+    //return a random integer in range 0 to max
     getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
     },
+    //randomly choose between the 3 arrays of episodes, characters and locations
     SelectRandomItem() {
       var type = this.getRandomInt(3);
       switch (type) {
@@ -77,7 +81,8 @@ export default {
       }
     },
   },
-  mounted() {
+  //select a random item before rendering the page
+  created() {
     this.SelectRandomItem();
   },
 };

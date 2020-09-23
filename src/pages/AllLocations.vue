@@ -2,7 +2,6 @@
   <div>
     <div>
       <h1>All Locations</h1>
-      <br />
       <RecordHolder :recordsProp="allData.locations" />
     </div>
   </div>

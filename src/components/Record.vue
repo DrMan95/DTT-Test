@@ -10,18 +10,12 @@ export default {
   props: {
     record: Object,
   },
-  data() {
-    return {
-      hover: false,
-    };
-  },
 };
 </script>
 
 <style scoped>
 button {
   width: 64%;
-  /* height: 30px; */
   background-color: coral;
   padding: 5px;
   border-radius: 16px;

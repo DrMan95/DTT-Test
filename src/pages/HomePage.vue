@@ -1,10 +1,8 @@
 <template>
   <div>
     <div>
-      <h2>
-        These are Rick & Morty episodes
-      </h2>
-      <br />
+      <h2>These are Rick & Morty episodes</h2>
+      <!-- component that holds all the episodes -->
       <RecordHolder :recordsProp="allData.episodes" />
     </div>
   </div>

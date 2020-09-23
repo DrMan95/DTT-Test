@@ -12,12 +12,15 @@
 export default {
   name: "Menu",
   methods: {
+    //rendering HomePage at router-view tag in App.vue
     goToHome() {
       this.$router.push("/");
     },
+    //rendering Categories at router-view tag in App.vue
     goToCategories() {
       this.$router.push("/Categories");
     },
+    //rendering RandomPage at router-view tag in App.vue
     goToRandom() {
       this.$router.push("/RandomPage");
     },

@@ -2,7 +2,6 @@
   <div>
     <div>
       <h1>All Characters</h1>
-      <br />
       <RecordHolder :recordsProp="allData.characters" />
     </div>
   </div>

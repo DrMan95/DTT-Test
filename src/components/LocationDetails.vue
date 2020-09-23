@@ -16,7 +16,10 @@
         </b-list-group-item>
         <b-list-group-item>
           <b>Residents</b>
-          <RecordHolder v-if="CharactersComputed.length > 0" :recordsProp="CharactersComputed" />
+          <RecordHolder
+            v-if="CharactersComputed.length > 0"
+            :recordsProp="CharactersComputed"
+          />
           <p v-else>This Planet has no residents.</p>
         </b-list-group-item>
         <b-list-group-item>
@@ -33,11 +36,6 @@ import RecordHolder from "../components/RecordHolder";
 
 export default {
   name: "LocationDetails",
-  data() {
-    return {
-      selectedRecord: undefined,
-    };
-  },
   props: {
     location: undefined,
     allData: undefined,
@@ -45,16 +43,8 @@ export default {
   components: {
     RecordHolder,
   },
-  methods: {
-    Show(index) {
-      this.selectedRecord = this.CharactersComputed[index];
-      this.$router.push({
-        name: "CharacterPage",
-        params: { data: this.selectedRecord },
-      });
-    },
-  },
   computed: {
+    //find the characters the are from this location, from the locations array.
     characters() {
       var tmp;
       var characters = [];
@@ -65,14 +55,9 @@ export default {
       return characters;
     },
     CharactersComputed() {
-      if (this.characters.length > 0) {
-        return this.characters;
-      } else {
-        return [];
-      }
+      return this.characters;
     },
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

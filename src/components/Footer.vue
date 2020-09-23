@@ -18,13 +18,21 @@
         </b-row>
         <b-row>dretakis.dre@gmail.com</b-row>
         <b-row>
-          <a href="https://www.linkedin.com/in/manthos-dretakis-3133a5197/" target="_blank">LinkedIn</a>
+          <a
+            href="https://www.linkedin.com/in/manthos-dretakis-3133a5197/"
+            target="_blank"
+            >LinkedIn</a
+          >
         </b-row>
         <b-row>
-          <a href="https://www.facebook.com/manthos.dretakis" target="_blank">Facebook</a>
+          <a href="https://www.facebook.com/manthos.dretakis" target="_blank"
+            >Facebook</a
+          >
         </b-row>
         <b-row>
-          <a href="https://www.instagram.com/dr.man95/?hl=en" target="_blank">Instagram</a>
+          <a href="https://www.instagram.com/dr.man95/?hl=en" target="_blank"
+            >Instagram</a
+          >
         </b-row>
       </b-col>
     </div>
@@ -42,12 +50,15 @@ export default {
     };
   },
   methods: {
+    //rendering HomePage at router-view tag in App.vue
     goToEpisodes() {
       this.$router.push("/");
     },
+    //rendering AllCharacters at router-view tag in App.vue
     goToCharaters() {
       this.$router.push("/AllCharacters");
     },
+    //rendering AllLocations at router-view tag in App.vue
     goToLocations() {
       this.$router.push("/AllLocations");
     },

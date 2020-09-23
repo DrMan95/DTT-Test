@@ -31,11 +31,6 @@
 import RecordHolder from "../components/RecordHolder";
 export default {
   name: "EpisodeDetails",
-  data() {
-    return {
-      selectedRecord: undefined,
-    };
-  },
   props: {
     episode: undefined,
     allData: undefined,
@@ -43,16 +38,8 @@ export default {
   components: {
     RecordHolder,
   },
-  methods: {
-    Show(index) {
-      this.selectedRecord = this.CharactersComputed[index];
-      this.$router.push({
-        name: "CharacterPage",
-        params: { data: this.selectedRecord },
-      });
-    },
-  },
   computed: {
+    //find the characters that are playing in this episode, from the characters array
     characters() {
       var tmp;
       var characters = [];
@@ -63,19 +50,9 @@ export default {
       return characters;
     },
     CharactersComputed() {
-      if (this.characters.length > 0) {
-        return this.characters;
-      } else {
-        return [];
-      }
+      return this.characters;
     },
   },
 };
 </script>
-<style scoped>
-.vue-video-player {
-  margin-left: 30%;
-  width: 40%;
-  height: 400px;
-}
-</style>
+<style scoped></style>

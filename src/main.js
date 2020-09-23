@@ -5,6 +5,7 @@ import VueRouter from "vue-router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+// these are my own components that I use in my App
 import App from "./App.vue";
 import HomePage from "./pages/HomePage";
 import Categories from "./pages/Categories";
@@ -14,6 +15,7 @@ import DetailPage from "./pages/DetailPage";
 import CharacterPage from "./pages/CharacterPage";
 import LocationPage from "./pages/LocationPage";
 import RandomPage from "./pages/RandomPage";
+//--------------------------------------------------
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
